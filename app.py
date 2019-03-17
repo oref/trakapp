@@ -6,6 +6,11 @@ from routes import *
 
 # Create teh application object
 app = Flask(__name__)
+app.config.from_object(config['dev'])
+db = SQLAlchemy(app)
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.session_protection = "strong"
 app.register_blueprint(routes)
 app.database = 'sample.db'
 app.secret_key = "my precious"
@@ -28,7 +33,7 @@ def login_required(f):
 
 # Use decorators to link the function to a url
 @app.route('/')
-#@login_required
+@login_required
 def home():
     g.db = connect_db()
     cur = g.db.execute('select * from posts')
@@ -43,6 +48,16 @@ def welcome():
 
 def connect_db():
     return sqlite3.connect(app.database)
+
+def get_google_auth(state=None, token=None):
+    if token:
+        return OAuth2Session(Auth.CLIENT_ID, token=token)
+    if state:
+        return OAuth2Session(Auth.CLIENT_ID, state=state.
+                             redirect_uri=Auth.REDIRECT_URI)
+    oauth = OAuth2Session(Auth.CLIENT_ID,
+                          redirect_uri = Auth.REDIRECT_URI, scope = Auth.SCOPE)
+    return oauth
 
 # Start the server with the 'run()' mehtod
 if __name__ == '__main__':
