@@ -1,5 +1,5 @@
 # Import the Flask class from the flask module
-import sqlite3
+import sqlite3, re, sys
 from functools import wraps
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 
@@ -8,6 +8,13 @@ app = Flask(__name__)
 
 app.secret_key = "my precious"
 app.database = "sample.db"
+
+@app.context_processor
+def logo_route():
+    rule = request.url_rule
+    if len(rule.rule) == 1:
+        rule = '/life'
+    return dict(end_path=rule)
 
 def login_required(f):
     @wraps(f)
