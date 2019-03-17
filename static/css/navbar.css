@@ -4,3 +4,8 @@
 .main-logo {
    color: black; 
 }
+.settings-btn {
+    height: auto;
+    width: 15px;
+    max-width: 100%;
+}
