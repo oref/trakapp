@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.register_blueprint(routes)
 app.database = 'sample.db'
 app.secret_key = os.environ.get("FN_FLASK_SECRET_KEY")
+app.title='trak'
 
 @app.context_processor
 def logo_route():
@@ -56,4 +57,4 @@ def get_google_auth(state=None, token=None):
 
 # Start the server with the 'run()' mehtod
 if __name__ == '__main__':
-   app.run(ssl_context='adhoc', debug=True)
+   app.run(ssl_context('cert.pem', 'key.pem'), debug=True)
