@@ -35,4 +35,6 @@ a[data-toggle="collapse"] {
     }
 }
 
-
+#homeBtn {
+    text-decoration: none;
+}

@@ -4,7 +4,7 @@ from functools import wraps
 import sqlite3, re, sys
 from routes import *
 
-#@routes.route('/login', methods=['GET', 'POST'])
+@routes.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
     if request.method == 'POST':
@@ -15,7 +15,7 @@ def login():
             return redirect(url_for('home'))
     return render_template('login.html', error=error)
 
-#@routes.route('/logout')
+@routes.route('/logout')
 def logout():
     session.pop('logged_in', None)
     flash('You were just loggedout!')

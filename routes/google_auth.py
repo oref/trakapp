@@ -21,7 +21,7 @@ AUTH_TOKEN_KEY = 'auth_token'
 AUTH_STATE_KEY = 'auth_state'
 USER_INFO_KEY = 'user_info'
 
-@routes.route('/')
+#@routes.route('/')
 def index():
     if is_logged_in():
         user_info = get_user_info()
@@ -29,7 +29,7 @@ def index():
 
     return 'You are not currently logged in'
 
-def no_cache(view):
+#def no_cache(view):
     @functools.wraps(view)
     def no_cache_impl(*args, **kwargs):
         response = flask.make_response(view(*args, **kwargs))
@@ -40,9 +40,9 @@ def no_cache(view):
 
     return functools.update_wrapper(no_cache_impl, view)
 
-@routes.route('/google/login')
-@no_cache
-def login():
+#@routes.route('/google/login')
+#@no_cache
+#def login():
     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET, scope=AUTHORIZATION_SCOPE, redirect_uri=AUTH_REDIRECT_URI)
     uri, state = session.create_authorization_url(AUTHORIZATION_URL)
     flask.session[AUTH_STATE_KEY] = state
@@ -50,9 +50,9 @@ def login():
     return flask.redirect(uri, code=302)
 
 
-@routes.route('/google/auth')
-@no_cache
-def google_auth_redirect():
+#@routes.route('/google/auth')
+#@no_cache
+#def google_auth_redirect():
     state = flask.request.args.get('state', default=None, type=None)
 
     session = OAuth2Session(CLIENT_ID, CLIENT_SECRET, scope=AUTHORIZATION_SCOPE, state=state, redirect_uri=AUTH_REDIRECT_URI)
@@ -61,19 +61,19 @@ def google_auth_redirect():
 
     return flask.redirect(BASE_URI, code=302)
 
-@routes.route('/google/logout')
-@no_cache
-def logout():
+#@routes.route('/google/logout')
+#@no_cache
+#jdef logout():
     flask.session.pop(AUTH_TOKEN_KEY, None)
     flask.session.pop(AUTH_STATE_KEY, None)
     flask.session.pop(USER_INFO_KEY, None)
 
     return flask.redirect(BASE_URI, code=302)
 
-def is_logged_in():
+#def is_logged_in():
     return True if AUTH_TOKEN_KEY in flask.session else False
 
-def build_credentials():
+#def build_credentials():
     if not is_logged_in():
         raise Exception('User must be logged in')
 
@@ -85,7 +85,7 @@ def build_credentials():
         client_secret=CLIENT_SECRET,
         token_uri=ACCESS_TOKEN_URI)
 
-def get_user_info():
+#def get_user_info():
     credentials = build_credentials()
     oauth2_client = googleapiclient.discovery.build('oauth2', 'v2', credentials=credentials)
     return oauth2_client.userinfo().get().execute()
