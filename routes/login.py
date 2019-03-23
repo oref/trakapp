@@ -19,6 +19,6 @@ def login():
 def logout():
     session.pop('logged_in', None)
     flash('You were just loggedout!')
-    return redirect(url_for('welcome'))
+    return redirect(url_for('home'))
 
 

@@ -15,7 +15,7 @@ app.title='trak'
 def logo_route():
     rule = request.url_rule
     if len(rule.rule) == 1:
-        rule = '/life'
+        rule = '/welcome'
     return dict(end_path=rule)
 
 def login_required(f):
@@ -37,10 +37,6 @@ def home():
     print(posts)
     g.db.close()
     return render_template('index.html', posts=posts)
-
-@app.route('/welcome')
-def welcome():
-    return render_template('welcome.html')
 
 def connect_db():
     return sqlite3.connect(app.database)
