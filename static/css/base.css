@@ -45,7 +45,7 @@ a, a:hover, a:focus {
 }
 #sidebar ul li a:hover {
     color: inherit;
-    background: black;
+    background: #8c8c8c;
     text-decoration: none;
 }
 

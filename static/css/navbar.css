@@ -44,3 +44,7 @@ a[data-toggle="collapse"] {
 .navbar-expand-lg {
     background-color: #fff !important;
 }
+#homeBtn {
+    text-decoration: none;
+    color: #fff;
+}
