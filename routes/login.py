@@ -5,7 +5,7 @@ import sqlite3, re, sys
 from routes import *
 
 @routes.route('/login', methods=['GET', 'POST'])
-def login2():
+def login():
     error = None
     if request.method == 'POST':
         if request.form['username'] != 'admin' or request.form['password'] != 'admin':
@@ -16,7 +16,7 @@ def login2():
     return render_template('login.html', error=error)
 
 @routes.route('/logout')
-def logout2():
+def logout():
     session.pop('logged_in', None)
     flash('You were just loggedout!')
     return redirect(url_for('home'))

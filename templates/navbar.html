@@ -9,12 +9,16 @@
         <li class="active">
             <!--<a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>-->
         </li>
+        {% if 'logged_in' not in session %}
         <li>
             <a href="/login">Login</a>
         </li>
+        {% endif %}
+        {% if 'logged_in' in session %}
         <li>
             <a href="/logout">Logout</a>
         </li>
+        {% endif %}
         <li>
             <a href="/bujo">Bujo</a>
         </li>
