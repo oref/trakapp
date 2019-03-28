@@ -4,3 +4,4 @@ trak/
 *.wiki
 .api
 *.json
+run.sh

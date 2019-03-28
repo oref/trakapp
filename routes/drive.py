@@ -25,7 +25,7 @@ def drive():
 		s = ""
 		for file in all_files:
 			s += "%s, %s<br>" % (file['name'],file['id'])
-		return s
+		return render_template('drive.html', s=s)
 
 @routes.route('/oauth2callback')
 def oauth2callback():
