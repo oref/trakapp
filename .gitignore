@@ -5,3 +5,4 @@ trak/
 .api
 *.json
 run.sh
+old.*

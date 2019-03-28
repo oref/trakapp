@@ -11,3 +11,4 @@ def welcome_user():
     else:
         welcome_status = 'You are not logged in'
         return dict(welcome=welcome_status)
+
