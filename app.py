@@ -53,4 +53,9 @@ def get_google_auth(state=None, token=None):
 
 # Start the server with the 'run()' mehtod
 if __name__ == '__main__':
-   app.run(ssl_context('cert.pem', 'key.pem'), debug=True)
+    if os.path.exists('client_id.json') == False:
+        print('Client secrets file (client_id.json) not found in the app path.')
+        exit()
+    import uuid
+    app.secret_key=(str(uuid.uuid4()))
+    app.run(ssl_context('cert.pem', 'key.pem'), debug=True)
