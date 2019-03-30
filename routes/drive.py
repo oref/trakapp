@@ -139,7 +139,7 @@ def update_file(file_id, local_file):
 		#newRevision=True,
 		media_body=media_body).execute()
 
-@routes.route('/upload')
+@routes.route('/upload', methods=['GET','POST'])
 def submit(file_id, local_file, methods=['POST']):
     credentials = get_credentials()
     http = credentials.authorize(httplib2.Http())
@@ -151,3 +151,4 @@ def submit(file_id, local_file, methods=['POST']):
                                   media_body=media,
                                   fields='id').execute()
     print("File ID: {0}".format(file.get('id')))
+    return render_template
