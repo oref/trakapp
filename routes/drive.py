@@ -46,7 +46,7 @@ def main():
 
     # Call the Drive v3 API
     results = service.files().list(
-        pageSize=10, fields="nextPageToken, files(id, name)").execute()
+        pageSize=20, fields="nextPageToken, files(id, name)").execute()
     items = results.get('files', [])
 
     if not items:
@@ -55,6 +55,7 @@ def main():
         print('Files:')
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
+            download_file(item['id'], item['name'])
 
 @routes.route('/drive')
 def drive():
