@@ -55,7 +55,6 @@ def main():
         print('Files:')
         for item in items:
             print(u'{0} ({1})'.format(item['name'], item['id']))
-            download_file(item['id'], item['name'])
 
 @routes.route('/drive')
 def drive():
@@ -70,7 +69,7 @@ def drive():
 		s = ""
 		for file in all_files:
 			s += "%s, %s<br>" % (file['name'],file['id'])
-		return render_template('drive.html', s=s)
+		return render_template('drive.html', s=s, credentials=credentials)
 
 @routes.route('/oauth2callback')
 def oauth2callback():
