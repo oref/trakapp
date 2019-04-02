@@ -2,9 +2,12 @@ from __future__ import print_function
 import os
 import flask
 from flask import flash, redirect, url_for
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
 import httplib2
 from apiclient import discovery
 from apiclient.http import MediaIoBaseDownload, MediaFileUpload
+from oauth2client.service_account import ServiceAccountCredentials
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
@@ -68,7 +71,7 @@ def drive():
 		all_files = fetch("'root' in parents and mimeType = 'application/vnd.google-apps.folder'", sort='modifiedTime desc')
 		s = ""
 		for file in all_files:
-			s += "%s, %s<br>" % (file['name'],file['id'])
+			s += "%s, %s" % (file['name'],file['id'])
 		return render_template('drive.html', s=s, credentials=credentials)
 
 @routes.route('/oauth2callback')
@@ -140,15 +143,5 @@ def update_file(file_id, local_file):
 		media_body=media_body).execute()
 
 @routes.route('/upload', methods=['GET','POST'])
-def submit(file_id, local_file, methods=['POST']):
-    credentials = get_credentials()
-    http = credentials.authorize(httplib2.Http())
-    service = discovery.build('drive', 'v3', http=http)
-    file_metadata = {'name':'test'}
-    media = MediaFileUpload('test',
-                            mimetype='application/pdf')
-    file = service.files().create(body=file_metadata,
-                                  media_body=media,
-                                  fields='id').execute()
-    print("File ID: {0}".format(file.get('id')))
-    return render_template
+def submit():
+    return
