@@ -1,4 +1,5 @@
 # Import the Flask class from the flask module
+import os
 import sqlite3, re, sys
 from functools import wraps
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g, Blueprint
@@ -43,9 +44,9 @@ def connect_db():
 
 # Start the server with the 'run()' mehtod
 if __name__ == '__main__':
-    if os.path.exists('client_id.json') == False:
-        print('Client secrets file (client_id.json) not found in the app path.')
-        exit()
-    import uuid
-    app.secret_key=(str(uuid.uuid4()))
-    app.run(ssl_context('cert.pem', 'key.pem'), debug=True)
+   #if os.path.exists('client_id.json') == False:
+   #    print('Client secrets file (client_id.json) not found in the app path.')
+   #    exit()
+   #import uuid
+   #app.secret_key=(str(uuid.uuid4()))
+    app.run(debug=True)

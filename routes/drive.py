@@ -2,8 +2,6 @@ from __future__ import print_function
 import os
 import flask
 from flask import flash, redirect, url_for
-from pydrive.auth import GoogleAuth
-from pydrive.drive import GoogleDrive
 import httplib2
 from apiclient import discovery
 from apiclient.http import MediaIoBaseDownload, MediaFileUpload
